@@ -100,5 +100,5 @@ This project supports:
 
 ## Screenshots
 
-_(Insert dashboard screenshots here for your report: Home tab, Live Analyzer
-result, Dataset Explorer map + charts, and Evaluation Metrics tab.)_
+<img width="1917" height="966" alt="image" src="https://github.com/user-attachments/assets/6897ce19-f617-4dd5-bcf7-c3f01bc80dde" />
+<img width="1911" height="952" alt="image" src="https://github.com/user-attachments/assets/c5d953bc-e849-48e3-a044-901e978f43ba" />
