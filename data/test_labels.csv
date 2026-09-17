@@ -1,0 +1,38 @@
+article_id,location,expected_category
+1,Mumbai,disaster
+2,Tokyo,economic
+3,Ankara,political
+4,Kathmandu,disaster
+5,London,political
+6,Sao Paulo,sports
+7,Nairobi,disaster
+8,Cairo,economic
+9,Sydney,disaster
+10,Lagos,health
+11,New York City,economic
+12,Caracas,political
+14,Chennai,disaster
+15,Toronto,economic
+16,Amman,health
+18,Manila,disaster
+20,Rome,political
+21,Melbourne,sports
+22,Baghdad,disaster
+23,Buenos Aires,economic
+24,Jakarta,disaster
+25,Boston,sports
+28,Dhaka,disaster
+29,Chicago,sports
+30,Kinshasa,health
+32,Houston,disaster
+34,Detroit,economic
+35,Hong Kong,political
+36,Fukuoka,disaster
+38,Dakar,health
+40,Warsaw,political
+41,Cape Town,disaster
+43,Buenos Aires,sports
+45,Moscow,disaster
+46,Madrid,health
+49,Bangkok,disaster
+50,Tehran,economic
