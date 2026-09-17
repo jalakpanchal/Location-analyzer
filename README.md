@@ -1,104 +1,193 @@
-# Location Entity Extraction & News Context Analyzer
+<div align="center">
 
-**Student:** Jalak Panchal | **Roll No:** 23UF17721AI036
+# 🗺️ Location Entity Extraction & News Context Analyzer
 
-A system that identifies geographical locations mentioned in news articles and
-analyzes their contextual association with events — categorizing the event type
-(disaster, political, economic, sports, health) and the sentiment of the
-surrounding text.
+**Identify locations in news articles and analyze the events surrounding them — automatically.**
 
-## Problem Statement
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![spaCy](https://img.shields.io/badge/spaCy-NER-09A3D5?logo=spacy&logoColor=white)](https://spacy.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen)]()
 
-Locations mentioned in news can provide important geographical information.
-This project develops a system that identifies locations and analyzes their
-contextual association with events, so patterns (which places are experiencing
-which kinds of events, and with what tone) can be surfaced from unstructured
-news text.
+<sub>Built as a micro-project for AI/DS coursework · By **Jalak Panchal** (23UF17721AI036)</sub>
 
-## Project Structure
+</div>
+
+---
+
+## ✨ Overview
+
+Locations mentioned in news carry important signals — where a disaster hit, where a protest broke out, where markets moved. This project builds an end-to-end NLP pipeline that:
+
+- 📍 **Detects locations** (cities, countries, regions) in raw news text using spaCy NER
+- 🧠 **Understands context** around each mention — what event happened, and how it reads emotionally
+- 🏷️ **Classifies the event type** — disaster, political, economic, sports, or health
+- 💬 **Scores sentiment** of the surrounding text using VADER
+- 🌍 **Visualizes results** on an interactive map + charts in a pastel-themed Streamlit dashboard
+- ✅ **Evaluates itself** with precision/recall/F1 against a hand-labeled test set
+
+<div align="center">
+
+*(📸 Add a screenshot or GIF of your dashboard here — see [Screenshots](#-screenshots))*
+
+</div>
+
+---
+
+## 📖 Table of Contents
+
+- [Features](#-features)
+- [Demo / Screenshots](#-screenshots)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [How It Works](#-how-it-works)
+- [Evaluation Results](#-evaluation-results)
+- [SDG Impact](#-sdg-impact)
+- [Limitations & Future Work](#-limitations--future-work)
+- [Author](#-author)
+
+---
+
+## 🚀 Features
+
+| Feature | Description |
+|---|---|
+| 🔎 **Live Analyzer** | Paste any news article and get instant location + event + sentiment extraction |
+| 🗺️ **Interactive Map** | See detected locations plotted globally, color-coded by event category |
+| 📊 **Dataset Explorer** | Filter, search, and browse results across 50+ sample articles |
+| ✅ **Built-in Evaluation** | Precision / Recall / F1 computed against a manually labeled test set |
+| 🎨 **Pastel UI** | Clean, calm, presentation-ready dashboard design |
+
+---
+
+## 📸 Screenshots
+
+> Replace these placeholders with real screenshots — drag & drop images into a GitHub issue/PR to get a hosted URL, then paste it below.
+
+| Home | Live Analyzer | Dataset Explorer |
+|---|---|---|
+| <img width="1917" height="966" alt="image" src="https://github.com/user-attachments/assets/6897ce19-f617-4dd5-bcf7-c3f01bc80dde" /> | <img width="1911" height="952" alt="image" src="https://github.com/user-attachments/assets/c5d953bc-e849-48e3-a044-901e978f43ba" /> | <img width="1917" height="962" alt="image" src="https://github.com/user-attachments/assets/0f08a585-4729-4834-969d-28c35c77831e" />
+ |
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Layer | Tools |
+|---|---|
+| **NLP / NER** | [spaCy](https://spacy.io/) (`en_core_web_sm`) |
+| **Sentiment** | [VADER](https://github.com/cjhutto/vaderSentiment) |
+| **Data** | pandas |
+| **Evaluation** | scikit-learn |
+| **Visualization** | Plotly |
+| **Frontend** | Streamlit |
+
+</div>
+
+---
+
+## 📁 Project Structure
 
 ```
 location-analyzer/
 ├── data/
 │   ├── news_sample.csv       # 50+ sample news articles
-│   └── test_labels.csv       # manually labeled test set for evaluation
+│   └── test_labels.csv       # manually labeled test set
 ├── src/
 │   ├── preprocessing.py      # text cleaning + sentence segmentation
 │   ├── ner_extraction.py     # spaCy GPE/LOC NER + normalization
 │   ├── context_analysis.py   # context window, event category, sentiment
-│   ├── aggregation.py        # dataset-wide frequency/category/sentiment stats
+│   ├── aggregation.py        # dataset-wide stats
 │   ├── geocode.py            # static lat/lon lookup for mapping
 │   └── evaluate.py           # precision / recall / F1 evaluation
 ├── app/
-│   └── main.py                # Streamlit dashboard (pastel theme)
+│   └── main.py                # Streamlit dashboard
 ├── requirements.txt
 └── README.md
 ```
 
-## Setup & Running
+---
+
+## ⚡ Getting Started
 
 ```bash
-pip install -r requirements.txt
+# 1. Clone the repo
+git clone https://github.com/<your-username>/location-entity-extraction-analyzer.git
+cd location-entity-extraction-analyzer
+
+# 2. Create a virtual environment
+python -m venv venv
+venv\Scripts\activate        # Windows
+source venv/bin/activate     # macOS/Linux
+
+# 3. Install dependencies
+python -m pip install -r requirements.txt
 python -m spacy download en_core_web_sm
+
+# 4. Run the app
 streamlit run app/main.py
 ```
 
-The app opens in your browser with 5 tabs: Home/Overview, Live Analyzer,
-Dataset Explorer, Evaluation Metrics, and About/SDG Impact.
+The dashboard opens at `http://localhost:8501` 🎉
 
-## Methodology (mapped to rubric stages)
+---
 
-### Stage 1 — Problem Identification & Design Planning
-- **Problem Definition & Scope:** Extract locations from news text and classify
-  the event context around each mention.
-- **Design & Methodology:** A modular pipeline — preprocessing → NER →
-  context/semantic analysis → aggregation → evaluation — chosen for
-  transparency, offline reproducibility, and ease of testing at each stage.
-- **SDG Consideration:** Maps to SDG 11 and SDG 16 (see below).
+## ⚙️ How It Works
 
-### Stage 2 — Implementation & Testing
-- **Implementation Quality:** Fully functional end-to-end pipeline, from raw
-  CSV to live analysis in a dashboard.
-- **Tools/Technology Usage:** spaCy (`en_core_web_sm`) for NER and sentence
-  segmentation; VADER for sentiment; a rule-based keyword classifier for event
-  category (fast, transparent, and easy to evaluate for a micro-project scope);
-  a static lookup table for location-to-coordinate mapping (keeps the app
-  offline-friendly and reliable during a live viva/demo).
-- **Testing & Validation:** `evaluate.py` computes precision, recall, F1
-  (macro-averaged), and accuracy against a manually labeled 37-example test
-  set (`data/test_labels.csv`). Current results: **~92% accuracy**, F1
-  (macro) ≈ 0.69 — errors are visible and explainable (e.g., an article
-  about subway funding not using the word "economic" explicitly).
+```mermaid
+flowchart LR
+    A[Raw News Text] --> B[Preprocessing<br/>clean + segment]
+    B --> C[NER Extraction<br/>spaCy GPE/LOC]
+    C --> D[Context Window<br/>per location]
+    D --> E[Event Classification<br/>rule-based]
+    D --> F[Sentiment Analysis<br/>VADER]
+    E --> G[Aggregation &<br/>Dashboard]
+    F --> G
+```
 
-### Stage 3 — Analysis, Report & Presentation
-- **Data Analysis & Interpretation:** Aggregation functions surface the most
-  frequently mentioned locations, the event category breakdown, and the
-  sentiment breakdown across the dataset.
-- **Report & Presentation:** The Streamlit dashboard presents results via a
-  world map (color-coded by event category), bar/pie charts, a searchable
-  results table, and a live analyzer for new articles.
+---
 
-## SDG Impact
+## ✅ Evaluation Results
 
-This project supports:
-- **SDG 11 — Sustainable Cities and Communities:** by surfacing where
-  disaster or infrastructure-related events are being reported, supporting
-  faster situational awareness for city planners and emergency responders.
-- **SDG 16 — Peace, Justice and Strong Institutions:** by helping track where
-  political unrest or governance-related events are occurring, supporting
-  transparency and misinformation/context tracking.
+Evaluated against a 37-example manually labeled test set:
 
-## Limitations & Future Improvements
+| Metric | Score |
+|---|---|
+| Accuracy | **~92%** |
+| Precision (macro) | 0.71 |
+| Recall (macro) | 0.66 |
+| F1 (macro) | 0.69 |
 
-- The event classifier is rule-based (keyword matching); a zero-shot
-  transformer (e.g. `facebook/bart-large-mnli`) could improve nuance at the
-  cost of speed and offline reliability.
-- Geocoding uses a static lookup table, so locations outside the sample
-  dataset won't appear on the map unless added or replaced with a live
-  geocoder (e.g. `geopy` + Nominatim).
-- VADER sentiment is lexicon-based and can miss sarcasm or complex tone.
+---
 
-## Screenshots
+## 🌍 SDG Impact
 
-<img width="1917" height="966" alt="image" src="https://github.com/user-attachments/assets/6897ce19-f617-4dd5-bcf7-c3f01bc80dde" />
-<img width="1911" height="952" alt="image" src="https://github.com/user-attachments/assets/c5d953bc-e849-48e3-a044-901e978f43ba" />
+This project aligns with:
+
+- **SDG 11 — Sustainable Cities and Communities**: supports faster situational awareness for disaster/infrastructure events
+- **SDG 16 — Peace, Justice and Strong Institutions**: helps track political unrest and governance-related events for transparency
+
+---
+
+## 🔮 Limitations & Future Work
+
+- [ ] Replace rule-based classifier with a zero-shot transformer (e.g. `facebook/bart-large-mnli`)
+- [ ] Add live geocoding via `geopy` for locations outside the sample dataset
+- [ ] Expand dataset with a live news API integration
+
+---
+
+## 👤 Author
+
+**Jalak Panchal**
+
+Roll No: 23UF17721AI036
+
+<div align="center">
+<sub>⭐ If you found this useful, consider starring the repo!</sub>
+</div>
+
